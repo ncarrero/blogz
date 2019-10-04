@@ -14,10 +14,9 @@
     </head>
 <body>
     <div>
-    {% if 'user' in session %}
-        {{ session['user'] }}
+    <a href='/login'>Log In</a>
     <a href='/logout'>Log Out</a>
-    {% endif %}
+    <a href='/index'>Home</a>
     <a href='/blog'>Blog Posts</a>
     <a href='/newpost'>Create a New Post</a>
     </div>

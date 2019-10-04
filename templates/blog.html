@@ -5,17 +5,26 @@
 {% if blog_list|length == 0 %}
     <p>No posts yet.</p>
 {% endif %}
-{% if not id %}
-    {% for post in blog_list %}
+
+<!--show blog posts from only one user-->
+{% if email %}
+    {% for post in user_blog_list %}
+        <ol>
+            <h2><a href="blog?id={{ post.owner.id }}">{{ post.owner.title }}</a></h2>
+            <p>{{ post.body }}</p>
+            <p>Posted by <a href="/blog?user={{ post.owner.email }}">{{ post.owner.email }}.</a></p>
+        </ol>
+    {% endfor %}
+
+<!--show all blog posts from all users-->
+{% else %}
+        {% for post in blog_list %}
         <ol>
             <h2><a href="blog?id={{ post.id }}">{{ post.title }}</a></h2>
             <p>{{ post.body }}</p>
+            <p>Posted by <a href="/blog?user={{ post.owner.email }}">{{ post.owner.email }}.</a></p>
         </ol>
-    {% endfor %}
-{% endif %}
-{% if id %}
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.body }}</p>
+        {% endfor %}
 {% endif %}
 
 {% endblock %}
