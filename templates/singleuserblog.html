@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if blog_list|length == 0 %}
+    <p>No posts yet.</p>
+{% endif %}
+
+<!--show blog posts from only one user-->
+    {% for post in email_blog_list %}
+        <ol>
+            <h2><a href="blog?id={{ post.id }}">{{ post.title }}</a></h2>
+            <p>{{ post.body }}</p>
+            <p>Posted by <a href="/blog?user={{ post.owner.email }}">{{ post.owner.email }}.</a></p>
+        </ol>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,9 @@
+
+<!--show all blog posts from all users-->
+        {% for post in blog_list %}
+        <ol>
+            <h2><a href="blog?id={{ post.id }}">{{ post.title }}</a></h2>
+            <p>{{ post.body }}</p>
+            <p>Posted by <a href="/blog?user={{ post.owner.email }}">{{ post.owner.email }}.</a></p>
+        </ol>
+        {% endfor %}

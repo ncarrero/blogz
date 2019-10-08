@@ -113,12 +113,13 @@ def blog():
     #TODO:
     #show blog posts from only one user (query for user that owns the blog's posts)
     elif email:
-        user_blog_list = User.blogs.query.filter_by(email=email)
-        return render_template('blog.html', heading=heading2, owner=owner, user_blog_list=user_blog_list)
-    #show blog posts from all users (query the entire blog list)
+        email_id = User.query.get(id)
+        email_blog_list = Blog.query.filter_by(owner=email).all()
+        return render_template('singleuserblog.html', heading=heading2, email=email, email_blog_list=email_blog_list)
+    #show blog posts for all users
     else:
         blog_list = Blog.query.all()
-        return render_template('blog.html', heading=heading3, blog_list=blog_list)
+        return render_template('alluserblog.html', heading=heading3, blog_list=blog_list)
 
 @app.route('/newpost', methods=['GET', 'POST'])
 def newpost():
